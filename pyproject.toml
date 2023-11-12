@@ -1,0 +1,51 @@
+[tool.poetry]
+name = "cv-data-storage"
+version = "0.1.0"
+description = ""
+authors = ["DmytroZasl <zaslavsky.dima20@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.23"}
+alembic = "^1.12.1"
+pydantic = "^2.4.2"
+pydantic-settings = "^2.0.3"
+pytest = "^7.4.3"
+black = "^23.11.0"
+ruff = "^0.1.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+# Linters
+[tool.black]
+line-length = 100
+target-version = ['py311']
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+select = [
+    "I",  # isort
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+    "F",  # pyflakes
+    "E",  # pycodestyle
+    "TID",  # flake8-tidy-imports
+    "RUF", # ruff-internal
+    "C901", # mccabe
+]
+ignore = [
+    "E501",  # line too long, handled by black
+    "C401",  # generator syntax for sets vs always force set comprehension
+    "PLC0414",  # allow explicit re-exports using 'as' without forcing __all__
+    "RUF001", # allow CYRILLIC letter
+]
+
+    [tool.ruff.isort]
+    known-first-party = ["cv_data_storage", "tests"]
